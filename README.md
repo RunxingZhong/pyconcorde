@@ -71,6 +71,15 @@ PyConcorde is a very light-weight library. The main entry point is the
     Rounded Euclidean Norm (CC_EUCLIDEAN)
 ```    
 
+Use self-defined distance matrix:
+```python
+   from concorde.tsp import TSPSolver
+   dist_matrix = [[0, 1, 2, 3], [1, 0, 3, 4], [2, 3, 0, 1], [3, 4, 1, 0]]
+   # solver only supports integral edge weights, so here float will be rounded to two
+   # decimals, multiplied by 100 and converted to integer
+   solver = TSPSolver.from_data(dist_matrix=dist_matrix)
+```
+
 As you can see above, PyConcorde (or rather, Concorde) is somewhat chatty and
 will print various message to the standard output. Now that we have a solver
 instance, let's compute a solution. On my machine this is almost instantaneous.
