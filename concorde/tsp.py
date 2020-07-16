@@ -32,12 +32,15 @@ class TSPSolver(object):
         return self
 
     @classmethod
-    def from_data(cls, xs, ys, norm, name=None):
+    def from_data(cls, xs=None, ys=None, norm="EUC_2D", name=None, dist_matrix=None):
         """ Construct datagroup from given data.
 
         This routine writes the given data to a temporary file, and then uses
         Concorde's file parser to read from file and do the initialization.
         """
+        if xs is None and ys is None and dist_matrix is None:
+            raise ValueError("One of dist_matrix and (xs, ys) must be not None")
+
         if norm not in EDGE_WEIGHT_TYPES:
             raise ValueError("norm must be one of {} but got {!r}".format(
                              ', '.join(EDGE_WEIGHT_TYPES), norm))
@@ -50,7 +53,7 @@ class TSPSolver(object):
             ccdir = tempfile.mkdtemp()
             ccfile = os.path.join(ccdir, 'data.tsp')
             with open(ccfile, 'w') as fp:
-                write_tsp_file(fp, xs, ys, norm, name)
+                write_tsp_file(fp, xs, ys, norm, name, dist_matrix)
             return cls.from_tspfile(ccfile)
         finally:
             shutil.rmtree(ccdir)
