@@ -3,6 +3,8 @@ PyConcorde
 
 [![Build Status](https://travis-ci.org/jvkersch/pyconcorde.svg?branch=master)](https://travis-ci.org/jvkersch/pyconcorde)
 
+Note that current version does not support number of points smaller than 5! 
+
 What is it?
 -----
 
